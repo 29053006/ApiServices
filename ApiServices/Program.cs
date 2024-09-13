@@ -13,7 +13,8 @@ builder.Services.AddSwaggerGen();
 
 
 var key = builder.Configuration.GetValue<string>("JwtSettings:Key");
-var keyBytes = Encoding.UTF8.GetBytes(key);
+var host = builder.Configuration.GetValue<string>("Api.Root");
+var keyBytes = Encoding.UTF8.GetBytes(key + host);
 
 builder.Services.AddAuthentication(config => {
     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
